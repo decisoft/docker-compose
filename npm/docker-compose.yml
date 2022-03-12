@@ -2,6 +2,7 @@ version: '3'
 services:
   app:
     image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx
     restart: unless-stopped
     ports:
       - '80:80'
@@ -14,11 +15,12 @@ services:
       DB_MYSQL_PASSWORD: "npm"
       DB_MYSQL_NAME: "npm"
     volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt
+      - /mnt/appdata/docker/nginx/data:/data
+      - /mnt/appdata/docker/nginx/data/letsencrypt:/etc/letsencrypt
   db:
     image: 'jc21/mariadb-aria:latest'
     restart: unless-stopped
+    container_name: nginx_db
     environment:
       MYSQL_ROOT_PASSWORD: 'npm'
       MYSQL_DATABASE: 'npm'
@@ -27,3 +29,7 @@ services:
     volumes:
       - ./data/mysql:/var/lib/mysql
 
+networks:
+  default:
+    external: true
+    name: nginx_default
