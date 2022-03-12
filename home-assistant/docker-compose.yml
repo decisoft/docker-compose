@@ -9,4 +9,57 @@ services:
       - /mnt/usb/docker/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
     restart: always
+    
+  esphome:
+    image: esphome/esphome:latest
+    # devices:
+    #  - "/dev/ttyUSB0:/dev/ttyUSB0"
+    #  - "/dev/bus/usb:/dev/bus/usb"
+    #  - "/dev/ttyS3:/dev/ttyUSB0"
+    container_name: esphome
+    volumes:
+      - /mnt/appdata/docker/homeassistant/esphome:/config:rw
+      # Use local time for logging timestamps
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - ESPHOME_DASHBOARD_USE_PING=true
+    ports:
+      - 6152:6052
+      - 6123:6123
+    restart: unless-stopped
 
+  zigbee2mqtt:
+    container_name: zigbee2mqtt
+    image: koenkk/zigbee2mqtt:latest
+    volumes:
+      - /mnt/appdata/docker/homeassistant/zigbee2mqtt:/app/data
+      - /run/udev:/run/udev:ro
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    restart: always
+    ports:
+      - 8880:8080
+    privileged: true
+    environment:
+      - TZ=Europe/Madrid
+      #- PGID=1000
+      #- PUID=1000
+
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto
+    restart: always
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+    ports:
+      - 1883:1883
+      - 9001:9001 
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=Europe/Madrid
+
+networks:
+  default:
+    external: true
+    name: nginx_default
