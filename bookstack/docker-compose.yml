@@ -1,4 +1,3 @@
----
 version: "2"
 services:
   bookstack:
@@ -10,7 +9,7 @@ services:
       - APP_URL=http://192.168.1.154:6875
       - DB_HOST=bookstack_db
       - DB_USER=bookstack
-      - DB_PASS=wsWkm3QAp3fSw4tY2X
+      - DB_PASS=pass
       - DB_DATABASE=bookstackapp
     volumes:
       - /mnt/appdata/docker/bookstack/bookstack:/config
@@ -26,11 +25,11 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - MYSQL_ROOT_PASSWORD=wsWkm3QAp3fSw4tY2X
+      - MYSQL_ROOT_PASSWORD=pass
       - TZ=Europe/Madrid
       - MYSQL_DATABASE=bookstackapp
       - MYSQL_USER=bookstack
-      - MYSQL_PASSWORD=wsWkm3QAp3fSw4tY2X
+      - MYSQL_PASSWORD=pass
     volumes:
       - /mnt/appdata/docker/bookstack/mariadb:/config
     restart: unless-stopped
