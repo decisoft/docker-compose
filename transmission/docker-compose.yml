@@ -4,7 +4,6 @@ services:
   transmission:
     image: lscr.io/linuxserver/transmission
     container_name: transmission
-    network_mode: "container:gluetun"
     environment:
       - PUID=1000
       - PGID=1000
@@ -19,8 +18,8 @@ services:
       - /mnt/appdata/docker/new-transmission/config:/config
       - /mnt/hdd/downloads:/downloads
     #  - <path to watch folder>:/watch
-  #  ports:
-  #    - 9092:9091
+    ports:
+      - 9092:9091
   #    - 51413:51413
   #    - 51413:51413/udp
     restart: unless-stopped
