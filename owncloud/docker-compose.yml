@@ -1,0 +1,48 @@
+version: "3"
+services:
+
+
+
+
+
+
+services:
+  owncloud:
+    image: owncloud/server
+    container_name: owncloud_server
+    restart: always
+    ports:
+      - ${HTTP_PORT}:8080
+    depends_on:
+      - mariadb
+    environment:
+      - OWNCLOUD_DOMAIN=http://192.168.1.154:
+      - OWNCLOUD_DB_TYPE=mysql
+      - OWNCLOUD_DB_NAME=owncloud
+      - OWNCLOUD_DB_USERNAME=owncloud
+      - OWNCLOUD_DB_PASSWORD=owncloud
+      - OWNCLOUD_DB_HOST=mariadb
+      - OWNCLOUD_ADMIN_USERNAME=${ADMIN_USERNAME}
+      - OWNCLOUD_ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - OWNCLOUD_MYSQL_UTF8MB4=true
+    healthcheck:
+      test: ["CMD", "/usr/bin/healthcheck"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - /mnt/appdata/docker/owncloud:/var/www/html
+      - /mnt/appdata/docker/owncloud/apps:/var/www/html/apps
+      - /mnt/appdata/docker/owncloud/config:/var/www/html/config
+      - /mnt/appdata/docker/owncloud/data:/var/www/html/data
+  
+  mariadb:
+    image: lscr.io/linuxserver/mariadb
+    container_name: owncloud_db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=owncloud
+      - MYSQL_USER=owncloud
+      - MYSQL_PASSWORD=owncloud
+      - MYSQL_DATABASE=owncloud
+
