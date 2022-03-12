@@ -2,18 +2,19 @@
 version: "2.1"
 services:
   duplicati:
-    image: linuxserver/duplicati
+    image: lscr.io/linuxserver/duplicati
     container_name: duplicati
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=0
+      - PGID=0
       - TZ=Europe/London
     volumes:
-      - /mnt/usb/docker/duplicati/config:/config
-      - /mnt/hdd/backups:/backups
-      - /mnt/usb/docker:/docker
+      - /mnt/appdata/docker/duplicati/config:/config
+      - /mnt/appdata/docker:/docker
       - /mnt/hdd:/hdd 
+      - /mnt/appdata:/appdata
       - /mnt/hdd/books:/books
     ports:
       - 8200:8200
     restart: unless-stopped
+
