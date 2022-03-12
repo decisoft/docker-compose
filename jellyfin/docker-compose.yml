@@ -9,9 +9,9 @@ services:
       - PGID=1000
       - TZ=Europe/London
     volumes:
-      - /mnt/usb/docker/jellyfin:/config
-      - /mnt/hdd/series:/data/tvshows
-      - /mnt/hdd/movies:/data/movies
+      - /mnt/appdata/docker/jellyfin:/config
+      - /mnt/hdd/series:/data/tvshows:ro
+      - /mnt/hdd/movies:/data/movies:ro
      # - /opt/vc/lib:/opt/vc/lib #optional
     ports:
       - 8096:8096
