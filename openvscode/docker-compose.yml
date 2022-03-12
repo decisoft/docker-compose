@@ -1,0 +1,25 @@
+---
+version: "2.1"
+services:
+  openvscode-server:
+    image: lscr.io/linuxserver/openvscode-server
+    container_name: openvscode-server
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Europe/Madrid
+      - CONNECTION_TOKEN=foobar123 #optional
+      - CONNECTION_SECRET= #optional
+      - SUDO_PASSWORD=password #optional
+      - SUDO_PASSWORD_HASH= #optional
+    volumes:
+      - /mnt/appdata/docker/vscode/config:/config
+      - /mnt/appdata/docker/:/docker
+    ports:
+      - 3030:3000
+    restart: unless-stopped
+
+networks:
+  default:
+    external: true
+    name: homer_default
