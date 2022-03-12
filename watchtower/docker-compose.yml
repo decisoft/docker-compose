@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCTOWER_LIFECYCLE_HOOKS=1
+      - WATCHTOWER_NOTIFICATIONS=shoutrrr
+      - WATCHTOWER_NOTIFICATION_URL=telegram://token@telegram/?channels=canal
+      - WATCHTOWER_NOTIFICATION_TEMPLATE=🆕🔔💻 Raspberry Pi 4B+ - DietPi {{println}}{{range .}}{{.Message}}{{println}}{{end}}
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - TZ=Europe/Madrid
+      #- WATCHTOWER_POLL_INTERVAL=86400
+      - WATCHTOWER_SCHEDULE=0 30 6 * * *
+      - WATCHTOWER_MONITOR_ONLY=true
+
+networks:
+  default:
+    external: true
+    name: homer_default
