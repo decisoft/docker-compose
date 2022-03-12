@@ -1,0 +1,143 @@
+---
+# Homepage configuration
+# See https://fontawesome.com/icons for icons options
+
+title: "Monica"
+subtitle: "Donde se encuentra todo"
+logo: "logo.png"
+# icon: "fas fa-skull-crossbones" # Optional icon
+
+header: true
+# footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
+
+# Optional theme customization
+theme: default
+colors:
+  light:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#f5f5f5"
+    card-background: "#ffffff"
+    text: "#363636"
+    text-header: "#ffffff"
+    text-title: "#303030"
+    text-subtitle: "#424242"
+    card-shadow: rgba(0, 0, 0, 0.1)
+    link-hover: "#363636"
+  dark:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#131313"
+    card-background: "#2b2b2b"
+    text: "#eaeaea"
+    text-header: "#ffffff"
+    text-title: "#fafafa"
+    text-subtitle: "#f5f5f5"
+    card-shadow: rgba(0, 0, 0, 0.4)
+    link-hover: "#ffdd57"
+
+# Optional navbar
+# links: [] # Allows for navbar (dark mode, layout, and search) without any links
+links:
+  - name: "Contribuye"
+    icon: "fab fa-github"
+    url: "https://github.com/bastienwirtz/homer"
+    target: "_blank" # optional html a tag target attribute
+  - name: "Repositorio de iconos"
+    icon: "fas fa-drafting-compass"
+    url: "https://github.com/NX211/homer-icons"
+    target: "_blank"
+  # this will link to a second homer page that will load config from additionnal-page.yml and keep default config values as in config.yml file
+  # see url field and assets/additionnal-page.yml.dist used in this example:
+  - name: "Perfil GitHub"
+    icon: "fas fa-file-alt"
+    url: "https://github.com/decisoft" 
+    target: "_blank"
+
+# Services
+# First level array represent a group.
+# Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
+services:
+  - name: "Aplicaciones"
+    icon: "fas fa-cloud"
+    items:
+      - name: "Jellyfin"
+        logo: "assets/tools/jellyfin.png"
+        subtitle: "Biblioteca multimedia"
+        tag: "app"
+        url: "http://192.168.1.154:8096"
+        target: "_blank" # optional html a tag target attribute
+      - name: "Nextcloud"
+        logo: "assets/tools/nextcloud.png"
+        subtitle: "Nube privada"
+        tag: "app"
+        url: "http://192.168.1.154:8181"
+        target: "_blank"
+      - name: "Calibre-web"
+        logo: "assets/tools/calibreweb.png"
+        subtitle: "Biblioteca de libros"
+        tag: "app"
+        url: "http://192.168.1.154:8083"
+        target: "_blank"
+      - name: "Home Assistant"
+        logo: "assets/tools/home-assistant.png"
+        subtitle: "Domótica"
+        tag: "app"
+        url: "http://192.168.1.154:8123"
+        target: "_blank"
+  - name: "Administración"
+    icon: "fas fa-server"
+    items:
+      - name: "Duplicati"
+        logo: "assets/tools/duplicati.png"
+        subtitle: "Copias de seguridad"
+        tag: "media" 
+        url: "http://192.168.1.154:8200"       
+        target: "_blank"
+      - name: "pi-hole"
+        logo: "assets/tools/pihole.png"
+        subtitle: "Bloqueador de anuncios y rastreadores"
+        tag: "cloud"
+        url: "http://192.168.1.154:380/admin"
+        target: "_blank"
+      - name: "Portainer"
+        logo: "assets/tools/portainer.png"
+        subtitle: "Gestión de docker"
+        tag: "docker"
+        url: "http://192.168.1.154:9000"
+        target: "_blank"
+      - name: "Netdata"
+        logo: "assets/tools/netdata.png"
+        subtitle: "Monitor de recursos"
+        tag: "privacy"
+        url: "http://192.168.1.154:19999"
+        target: "_blank"
+  - name: "Redes"
+    icon: "fas fa-network-wired"
+    items: 
+      - name: "WireGuard"
+        logo: "assets/tools/wireguard.png"
+        subtitle: "Panel de control Wireguard VPN"
+        tag: "VPN"
+        url: "http://192.168.1.154:51821"
+        target: "_blank"
+      - name: "Nginx Proxy Manager"
+        logo: "assets/tools/nginxproxymanager.png"
+        subtitle: "Proxy inverso"
+        tag: "Proxy"
+        url: "http://192.168.1.154:81"
+        target: "_blank"
+      - name: "TP-Link Mesh"
+        logo: "assets/tools/tplink.png"
+        subtitle: "Router mesh M4"
+        tag: "red"
+        url: "http://192.168.68.1"
+        target: "_blank"
+      - name: "Router principal"
+        logo: "assets/tools/router.png"
+        subtitle: "Administración router"
+        tag: "app"
+        url: "http://192.168.1.1"
+        target: "_blank"

@@ -1,0 +1,37 @@
+version: '2'
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    environment:
+      - SIGNUPS_ALLOWED=false
+      - INVITATIONS_ALLOWED=false
+    volumes:
+      - /mnt/hdd/vaultwarden:/data
+    ports:
+      - 88:80
+      - 3012:3012
+    restart: always
+
+  db-backup:
+    container_name: db-backup
+    image: tiredofit/db-backup
+    links:
+     - vaultwarden
+    volumes:
+      - /mnt/hdd/vaultwarden:/backup
+      - /mnt/usb/docker/db-backup/post-script.sh:/assets/custom-scripts/post-script.sh
+    environment:
+      - DB_TYPE=sqlite3
+      - DB_HOST=/backup/db.sqlite3
+      - DB_NAME=database
+      - DB_USER=root
+      - DB_DUMP_FREQ=1440
+#      - DB_DUMP_BEGIN=0000
+      - DB_CLEANUP_TIME=8640
+      - MD5=TRUE
+      - COMPRESSION=GZ
+      - SPLIT_DB=FALSE
+      - BACKUP_LOCATION=FILESYSTEM
+    restart: always

@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+  app:
+    image: fireflyiii/core:latest
+    container_name: firefly_app
+    restart: always
+    volumes:
+      - /mnt/appdata/docker/firefly/config:/var/www/html/storage/upload
+    env_file: .env
+    ports:
+      - 9425:8080
+    depends_on:
+      - db
+  db:
+    image: lscr.io/linuxserver/mariadb 
+    container_name: firefly_db   
+    hostname: fireflyiiidb
+    restart: always
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_USER=firefly
+      - MYSQL_PASSWORD=bXhHQZEIQh6bVTkgYm0X
+      - MYSQL_DATABASE=firefly
+    volumes:
+      - /mnt/appdata/docker/firefly/db:/var/lib/mysql
+
+networks:
+  default:
+    external: true
+    name: pihole_default

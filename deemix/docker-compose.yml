@@ -1,0 +1,17 @@
+version: '2'
+services:
+  deemix: #For downloading music.
+    image: registry.gitlab.com/bockiii/deemix-docker
+    container_name: deemix
+    volumes:
+      - /mnt/hdd/navidrome/music:/downloads
+      - /mnt/usb/docker/deemix:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - ARL= #yourARL
+      - UMASK_SET=022
+#      - DEEZUI=false
+    ports:
+      - 6595:6595
+    restart: always

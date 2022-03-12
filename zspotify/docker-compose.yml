@@ -1,0 +1,14 @@
+version: '3'
+services:
+  zspotify:
+    image: jsavargas/zspotify
+    container_name: zspotify
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - 'PUID=1000'
+      - 'PGID=1000'
+      - 'TZ=Europe/Madrid'
+    volumes:
+      - /mnt/usb/docker/zspotify:/config
+      - /mnt/hdd/navidrome/music:/download

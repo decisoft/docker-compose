@@ -1,0 +1,14 @@
+version: "3.1"
+services:
+  mealie:
+    container_name: mealie
+    image: hkotel/mealie:latest
+    restart: always
+    ports:
+      - 9925:80
+    environment:
+      DB_TYPE: sqlite
+      TZ: Europe/London
+    volumes:
+      - /home/mario/Descargas/docker/mealie:/app/data
+

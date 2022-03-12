@@ -1,0 +1,26 @@
+version: "2"
+
+services:
+  app:
+    image: monica
+    depends_on:
+      - db
+    ports:
+      - 8485:80
+    environment:
+      - APP_KEY=MiHe3JFtqFwnFaLC2X8tUzXsk56ExAKD #change this to another 32 character string.
+      - DB_HOST=db
+    volumes:
+      - /home/mario/Descargas/docker/monica:/var/www/html/storage
+    restart: always
+
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+      - MYSQL_DATABASE=monica
+      - MYSQL_USER=homestead
+      - MYSQL_PASSWORD=secret
+    volumes:
+      - /home/mario/Descargas/docker/monica/db:/var/lib/mysql
+    restart: always
