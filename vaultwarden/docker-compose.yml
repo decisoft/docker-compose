@@ -8,7 +8,7 @@ services:
       - SIGNUPS_ALLOWED=false
       - INVITATIONS_ALLOWED=false
     volumes:
-      - /mnt/hdd/vaultwarden:/data
+      - /mnt/appdata/vaultwarden:/data
     ports:
       - 88:80
       - 3012:3012
@@ -20,8 +20,8 @@ services:
     links:
      - vaultwarden
     volumes:
-      - /mnt/hdd/vaultwarden:/backup
-      - /mnt/usb/docker/db-backup/post-script.sh:/assets/custom-scripts/post-script.sh
+      - /mnt/appdata/vaultwarden:/backup
+      - /mnt/appdata/docker/db-backup/post-script.sh:/assets/custom-scripts/post-script.sh
     environment:
       - DB_TYPE=sqlite3
       - DB_HOST=/backup/db.sqlite3
@@ -35,3 +35,9 @@ services:
       - SPLIT_DB=FALSE
       - BACKUP_LOCATION=FILESYSTEM
     restart: always
+
+networks:
+  default:
+    external: true
+    name: vaultwarden
+
