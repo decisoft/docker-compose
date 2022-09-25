@@ -10,7 +10,7 @@ services:
       - TZ=Europe/Madrid
       - DOCKER_MODS=linuxserver/calibre-web:calibre
     volumes:
-      - /mnt/usb/docker/calibre-web:/config
+      - /mnt/appdata/docker/calibre-web:/config
       - /mnt/hdd/books:/books
     ports:
       - 8083:8083/tcp
