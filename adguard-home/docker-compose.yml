@@ -1,0 +1,22 @@
+version: "2"
+services:
+  adguardhome:
+    image: adguard/adguardhome:latest
+    container_name: adguardhome
+    environment:
+      - TZ=Europe/London
+      - PGID=1000
+      - PUID=1000
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 784:784/udp
+      - 853:853/tcp
+      - 3300:3000/tcp
+      - 1180:80/tcp
+      # - 443:443/tcp
+    # network_mode: host
+    volumes:
+      - ./config/workdir:/opt/adguardhome/work
+      - ./config/confdir:/opt/adguardhome/conf
+    restart: unless-stopped
