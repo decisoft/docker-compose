@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+    rclone:
+        image: rclone/rclone:latest
+        command: rcd --rc-web-gui --rc-addr :5572 --rc-user mario --rc-pass pass
+        ports:
+            - "5572:5572"
+        volumes:
+            - ./config:/config/rclone
+            - /mnt/:/data:shared
+            - /etc/passwd:/etc/passwd:ro
+            - /etc/group:/etc/group:ro
+#            - /etc/fuse.conf:/etc/fuse.conf:ro
+#        devices:
+#            - /dev/fuse:/dev/fuse:rwm
+#        cap_add:
+#            - SYS_ADMIN
+#        security_opt:
+#            - apparmor:unconfined
+        user: root
+       # network_mode: npm_default
+        container_name: rclone
+
+networks:
+  default:
+    external: true
+    name: homer_default
