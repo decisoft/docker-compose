@@ -1,0 +1,35 @@
+version: "2"
+services:
+  db_recipes:
+    container_name: tandoor_db
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  
+  recipes:
+    image: vabene1111/recipes
+    container_name: tandoor
+    ports:
+      - 4450:8080
+    volumes:
+      - ./config/staticfiles:/opt/recipes/staticfiles
+      - ./config/mediafiles:/opt/recipes/mediafiles
+    environment:
+      - SECRET_KEY=secret
+      - DEBUG=0
+      - DB_ENGINE=django.db.backends.postgresql
+      - POSTGRES_HOST=db_recipes
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=postgres
+    restart: unless-stopped
+    depends_on:
+      - db_recipes
+
+networks:
+  default:
+    external: true
+    name: nginx_default
