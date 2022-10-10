@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+  fr_db:
+    container_name: filerun_db
+    image: tobi312/rpi-mariadb:10.3
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_USER: filerun
+      MYSQL_PASSWORD: pass
+      MYSQL_DATABASE: filerun_db
+      PUID: 1000
+      PGID: 1000
+      TZ: Europe/London
+    volumes:
+      - ./config/db:/var/lib/mysql
+
+  filerun:
+    container_name: filerun
+    image: filerun/filerun:arm64v8
+    environment:
+      FR_DB_HOST: fr_db
+      FR_DB_PORT: 3306
+      FR_DB_NAME: filerun_db
+      FR_DB_USER: filerun
+      FR_DB_PASS: pass
+      APACHE_RUN_USER: mario
+      APACHE_RUN_USER_ID: 1000
+      APACHE_RUN_GROUP: mario
+      APACHE_RUN_GROUP_ID: 1000
+    depends_on:
+      - fr_db
+    links:
+      - fr_db:db
+    ports:
+      - "3654:80"
+    volumes:
+      - ./config/filerun/html:/var/www/html
+      - ./config/filerun/user-files:/user-files
+
+networks:
+  default:
+    external: true
+    name: nginx_default
