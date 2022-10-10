@@ -1,0 +1,28 @@
+version: '3.3'
+services:
+  kopia:
+    image: kopia/kopia:0.12
+    container_name: kopia
+    hostname: kopia
+    restart: always
+    user: root
+    ports:
+      - 51515:51515
+    environment:
+      - TZ=Europe/London
+      - RCLONE_CONFIG=/rclone/config/rclone.conf
+      - KOPIA_PASSWORD=pass
+    entrypoint: ["/usr/bin/kopia", "server", "--insecure", "--address=0.0.0.0:51515", "--override-username=mario@kopia", "--server-username=mario@kopia", "--server-password=pass"]
+    volumes:
+      - /mnt/appdata/docker/rclone/config/rclone.conf:/rclone/config/rclone.conf
+      - ./config/config:/app/config
+      - ./config/cache:/app/cache
+      - ./config/logs:/app/logs
+      - /mnt:/app/backup:ro
+      - /root:/app/root:ro
+      - /etc/cron.d:/app/cron:ro
+
+networks:
+  default:
+    external: true
+    name: homer_default
