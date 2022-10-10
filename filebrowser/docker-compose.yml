@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+    filebrowser:
+        container_name: filebrowser
+        volumes:
+#            - './config/root:/srv'
+            - '/mnt/hdd/:/srv:ro'
+            - './config/filebrowser.db:/database.db'
+            - './config/.filebrowser.json:/.filebrowser.json'
+#        user:
+#            - '1000:1000'
+        ports:
+            - '8076:80'
+        image: filebrowser/filebrowser
