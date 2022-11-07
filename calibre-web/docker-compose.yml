@@ -16,4 +16,15 @@ services:
       - 8083:8083/tcp
       - 8083:8083/udp
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.calibre.entrypoints=websecure"
+      - "traefik.http.services.calibre.loadbalancer.server.port=8083"
+      - "traefik.http.routers.calibre.rule=Host(`calibre.domain.ltd`)"
+      - "traefik.http.routers.calibre.tls.certresolver=letsencrypt"
+
+networks:
+  default:
+    external: true
+    name: traefik
 
