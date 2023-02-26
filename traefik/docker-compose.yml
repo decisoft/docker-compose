@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   traefik:
-    image: traefik:2.9.4
+    image: traefik:2.9.8
     container_name: traefik
     hostname: traefik
     restart: unless-stopped
@@ -78,9 +78,6 @@ services:
       - "traefik.http.middlewares.security-headers.headers.referrerPolicy=same-origin"
       # Security Headers: Permissions-Policy
       - "traefik.http.middlewares.security-headers.headers.permissionsPolicy=camera=(),microphone=(),usb=()"
-
-    extra_hosts:
-      - host.docker.internal:172.17.0.1 # https://doc.traefik.io/traefik/providers/docker/#host-networking
 
 networks:
   default:
